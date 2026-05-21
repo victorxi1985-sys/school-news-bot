@@ -1,17 +1,35 @@
 name: 择校日报
+
 on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   collect:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: 安装依赖
         run: pip install google-genai httpx python-dotenv
+
       - name: 运行收集器
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SENDKEY: ${{ secrets.SENDKEY }}
         run: python collector.py
+
+      - name: 发布到 GitHub Pages
+        run: |
+          cp reports/daily_$(date +%Y%m%d).html docs/index.html 2>/dev/null || cp reports/*.html docs/index.html
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add docs/index.html
+          git commit -m "更新日报 $(date +%Y-%m-%d)" || echo "无变化"
+          git push
