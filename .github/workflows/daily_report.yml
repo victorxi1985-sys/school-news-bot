@@ -27,7 +27,7 @@ jobs:
 
       - name: 发布到 GitHub Pages
         run: |
-          cp reports/daily_$(date +%Y%m%d).html docs/index.html 2>/dev/null || cp reports/*.html docs/index.html
+          cp reports/*.html docs/index.html
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add docs/index.html
