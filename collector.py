@@ -133,12 +133,10 @@ def send_report(html_content, title):
         print("⚠️  Server酱未配置")
         return
     try:
+        desp = "点击查看今日完整择校日报 👉 [择校日报](https://victorxi1985-sys.github.io/school-news-bot/)"
         resp = httpx.post(
             f"https://sctapi.ftqq.com/{SENDKEY}.send",
-            data={
-                "title": title,
-                "desp": html_content,
-            },
+            data={"title": title, "desp": desp},
             timeout=15,
         )
         result = resp.json()
@@ -188,3 +186,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+# 此行仅用于触发更新
