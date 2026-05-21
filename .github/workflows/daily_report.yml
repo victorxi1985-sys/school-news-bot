@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   collect:
@@ -25,11 +23,9 @@ jobs:
           SENDKEY: ${{ secrets.SENDKEY }}
         run: python collector.py
 
-      - name: 发布到 GitHub Pages
+      - name: 发布日报到 Pages
         run: |
-          cp reports/*.html docs/index.html
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add docs/index.html
-          git commit -m "更新日报 $(date +%Y-%m-%d)" || echo "无变化"
-          git push
+          latest=$(ls reports/*.html 2>/dev/null | tail -1)
+          if [ -n "$latest" ]; then
+            cp "$latest" docs/index.html
+            git config user.name "github-actions"
