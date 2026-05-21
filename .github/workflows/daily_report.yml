@@ -25,7 +25,9 @@ jobs:
 
       - name: 发布日报到 Pages
         run: |
-          latest=$(ls reports/*.html 2>/dev/null | tail -1)
-          if [ -n "$latest" ]; then
-            cp "$latest" docs/index.html
-            git config user.name "github-actions"
+          cp reports/*.html docs/index.html
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add docs/index.html
+          git commit -m "日报更新" || echo "无变化"
+          git push
