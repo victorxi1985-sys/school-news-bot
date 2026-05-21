@@ -133,7 +133,7 @@ def send_report(html_content, title):
         print("⚠️  Server酱未配置")
         return
     try:
-        desp = "点击查看今日完整择校日报 👉 [择校日报](https://victorxi1985-sys.github.io/school-news-bot/)"
+        desp = "点击查看今日动态 👉 [每日日报](https://victorxi1985-sys.github.io/school-news-bot/)\n\n点击查看学校全面对比 👉 [学校对比表](https://victorxi1985-sys.github.io/school-news-bot/compare.html)"
         resp = httpx.post(
             f"https://sctapi.ftqq.com/{SENDKEY}.send",
             data={"title": title, "desp": desp},
