@@ -102,8 +102,8 @@ def generate_html_report(schools_data):
         tag = '<span style="background:#e74c3c;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;margin-left:8px;">重要</span>' if important else ""
         cards_html += f"""
 <div style="background:#fff;border-radius:10px;padding:16px;margin-bottom:12px;border-left:4px solid {border_color};box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-  <div style="font-size:15px;font-weight:bold;color:#2c3e50;margin-bottom:8px;">{name}{tag}</div>
-  <div style="font-size:13px;color:#555;line-height:1.7;">{news}</div>
+  <div style="font-size:17px;font-weight:bold;color:#2c3e50;margin-bottom:8px;">{name}{tag}</div>
+  <div style="font-size:15px;color:#555;line-height:1.8;">{news}</div>
 </div>
 """
 
